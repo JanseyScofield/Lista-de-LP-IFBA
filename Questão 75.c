@@ -1,4 +1,4 @@
-/*Escreva um programa que ordene um array de inteiros de 15 posições utilizando o método da bolha (bubble sort).*/
+/*Escreva um programa que ordene um array de inteiros de 15 posições utilizando o método da bolha (select sort).*/
 
 #include <stdio.h>
 
