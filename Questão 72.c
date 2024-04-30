@@ -5,7 +5,7 @@ vetor ou -1 caso o valor não ocorra no vetor (Busca Binária).*/
 
 main(){
 	int vet[10], iCont, meio,inicio = 0, fim = 9, num;
-	int jCont;
+	int posicao = -1;
 	
 	for(iCont = 0; iCont < 10; iCont++)
 		scanf("%d",  &vet[iCont]);
@@ -17,7 +17,7 @@ main(){
 		meio = (inicio + fim)/2;
 		
 		if(vet[meio] == num){
-			jCont = 1;
+			posicao = meio;
 			break;
 		}
 		else if(vet[meio] > num){
@@ -28,10 +28,5 @@ main(){
 		}
 	}
 	
-	if(jCont == 1){
-		printf("Ocorre no vetor!");
-	}
-	else{
-		printf("-1");
-	}
+    printf("%d", posicao);
 }
