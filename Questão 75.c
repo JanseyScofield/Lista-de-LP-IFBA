@@ -1,25 +1,24 @@
-/*Escreva um programa que ordene um array de inteiros de 15 posições utilizando o método da bolha (select sort).*/
+/*Escreva um programa que ordene um array de inteiros de 15 posições utilizando o método da bolha (booble
+sort).*/
 
 #include <stdio.h>
 
-main(){
-	int vet[15], aux, iCont, jCont;
-	
-	for(iCont = 0; iCont < 15; iCont++){
-		scanf("%d", &vet[iCont]);
-	}
-	
-	for(iCont = 0; iCont < 15; iCont++){
-		for(jCont = 0; jCont < 14; jCont++){
-			if(vet[jCont] > vet[jCont+1]){
-				aux = vet[jCont];
-				vet[jCont] = vet[jCont+1];
-				vet[jCont+1] = aux;
-			}
-		}
-	}
-	
-	for(iCont = 0; iCont < 15;iCont++){
-		printf("%d\n", vet[iCont]);
-	}
+int main()
+{
+   int array[] = {233, 23,45,566,124, 128,2, 45, 12, 37};
+   int aux;
+   
+   for(int iCont = 9; iCont > 0; iCont--){
+       for(int jCont = iCont - 1; jCont >= 0; jCont--){
+           if(array[iCont] < array[jCont]){
+               aux = array[iCont];
+               array[iCont] = array[jCont];
+               array[jCont] = aux;
+           }
+           for(int kCont = 0; kCont < 10; kCont ++)
+                printf("%d ", array[kCont]);
+            printf("\n");
+       }
+   }
+    return 0;
 }
