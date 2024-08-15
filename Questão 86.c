@@ -7,7 +7,7 @@
 int main()
 {
     char numRomano[TAM_STR];
-    int iCont;
+    int iCont, valor, valorAnt = 0;
     int decimal = 0;
     
     fgets(numRomano,TAM_STR, stdin);
@@ -15,15 +15,28 @@ int main()
     for(iCont = 0; numRomano[iCont + 1]; iCont++){
         switch(numRomano[iCont]){
             case 'I':
-               numRomano[iCont] = 1;
+               valor= 1;
                break;
             case 'V':
-               numRomano[iCont] = 5;
+               valor = 5;
                break;
             case 'X':
-               numRomano[iCont] = 10;
+               valor = 10;
+            	break;
+        	case 'L':
+               valor= 50;
+            	break;
+            case 'C':
+               valor = 100;
+            	break;
+            case 'D':
+               valor = 500;
+            	break;
+            case 'M':
+               valor = 1000;
         }
-        decimal += numRomano[iCont - 1] != 1? numRomano[iCont] : -2 + numRomano[iCont];
+        decimal += valor <= valorAnt? valor : -(valorAnt * 2) + valor;
+        valorAnt = valor;
     }
     
     printf("%d", decimal);
