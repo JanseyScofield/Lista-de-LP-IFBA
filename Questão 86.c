@@ -1,44 +1,26 @@
-//  Escreva um número que leia um número em Romano e imprima o equivalente em 
+// Escreva  um  número  que  leia  um  número  em  Romano  e  imprima  o  equivalente  em  
 // decimal (base 10)
 
 #include <stdio.h>
 #define TAM_STR 50
 
-int main()
-{
-    char numRomano[TAM_STR];
-    int iCont, valor, valorAnt = 0;
-    int decimal = 0;
-    
-    fgets(numRomano,TAM_STR, stdin);
-    
-    for(iCont = 0; numRomano[iCont + 1]; iCont++){
-        switch(numRomano[iCont]){
-            case 'I':
-               valor= 1;
-               break;
-            case 'V':
-               valor = 5;
-               break;
-            case 'X':
-               valor = 10;
-            	break;
-        	case 'L':
-               valor= 50;
-            	break;
-            case 'C':
-               valor = 100;
-            	break;
-            case 'D':
-               valor = 500;
-            	break;
-            case 'M':
-               valor = 1000;
-        }
-        decimal += valor <= valorAnt? valor : -(valorAnt * 2) + valor;
-        valorAnt = valor;
+void main(){
+    char numRomanos[7] =  {'I', 'V','X', 'L', 'C', 'D', 'M'};
+    int numDecimais[7] =  {1, 5, 10, 50, 100, 500, 1000};
+    char entrada[TAM_STR];
+    int decimal = 0,valorAtual, valorAnterior;
+    int iCont, posicao;
+
+    fgets(entrada,TAM_STR, stdin);
+
+    for(iCont = 0; entrada[iCont] != '\n'; iCont++){
+        for(posicao = 0; posicao < 7; posicao++)
+            if(entrada[iCont] == numRomanos[posicao])
+                break;
+            valorAtual = numDecimais[posicao];
+        decimal += valorAtual <= valorAnterior ? valorAtual : -(2*valorAnterior) + valorAtual;
+        valorAnterior = valorAtual;
     }
-    
+
     printf("%d", decimal);
-    return 0;
 }
