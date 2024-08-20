@@ -9,36 +9,60 @@ programa deverá informar:
 (3) Qual a combinação mais freqüente de idades de casamento*/
 //Continuar
 #include <stdio.h>
-#define COLUNAS 2
-#define QTD_CASAIS 100
+#define TAM 12
 
-int main()
-{
-    int quantidadeCasais;
-    int iCont, jCont, kCont, lCont;
-    int frequencia;
-    int maiorFrequenciaHomem = 0, numMaisFrequenteHomem;
-    int maiorFrequenciaMulher = 0, numMaisFrequenteMulher;
-    int idadesCasais[QTD_CASAIS][COLUNAS];
+main(){
+	int idadeCasais[TAM][TAM];
+	int idadeMasculina, idadeFeminina;
+	int frequencia, maiorFrequencia,idadeMaisFrequenteHomens;
+	int idadeMaisFrequenteMulheres, idadeMaisFrequenteCasais[2];
+	int iCont, jCont;
+	
+	for(iCont = 0; iCont < TAM; iCont++)
+		for(jCont = 0; jCont < TAM; jCont++)
+			idadeCasais[iCont][jCont] = 0;	
+			
+	do{
+		scanf("%d %d",&idadeMasculina, &idadeFeminina);
+		if((idadeMasculina < 18 || idadeMasculina > 30) || (idadeFeminina < 18 || idadeFeminina > 30))
+			break;
+		idadeCasais[idadeMasculina - 18][idadeFeminina - 18]++;
+	}while(1);
     
-    for(iCont = 0, jCont = 0; iCont < QTD_CASAIS; iCont ++, jCont += 2){
-            scanf("%d %d", &idadesCasais[iCont][jCont], &idadesCasais[iCont][jCont + 1]);
-            if((idadesCasais[iCont][jCont] < 18 || idadesCasais[iCont][jCont] > 30) || (idadesCasais[iCont][jCont + 1] < 18 || idadesCasais[iCont][jCont + 1] > 30))
-                break;
-    }
-    
-    kCont = iCont - 1;
-    for(iCont = 0, jCont = 0; iCont <= kCont; iCont++){
-        frequencia = 0;
-        for(lCont = iCont + 1; lCont <= kCont; lCont++)
-            if(idadesCasais[iCont][jCont] == idadesCasais[lCont][jCont])
-                frequencia++;
-        if(frequencia > maiorFrequenciaHomem){
-            maiorFrequenciaHomem = frequencia;
-            numMaisFrequenteHomem = idadesCasais[iCont][jCont];
-        }
-    }
-    
-    printf("%d", numMaisFrequenteHomem );
-    return 0;
+	maiorFrequencia = 0;		
+	for(iCont = 0; iCont < TAM; iCont++){
+		frequencia = 0;
+		for(jCont = 0; jCont < TAM; jCont++)
+			frequencia += idadeCasais[jCont][iCont];		
+		if(frequencia > maiorFrequencia){
+			maiorFrequencia = frequencia;
+			idadeMaisFrequenteHomens = iCont + 18;
+		}
+	}
+	
+	maiorFrequencia = 0;		
+	for(iCont = 0; iCont < TAM; iCont++){
+		frequencia = 0;
+		for(jCont = 0; jCont < TAM; jCont++)
+			frequencia += idadeCasais[iCont][jCont];		
+		if(frequencia > maiorFrequencia){
+			maiorFrequencia = frequencia;
+			idadeMaisFrequenteMulheres = iCont + 18;
+		}
+	}
+	
+	maiorFrequencia = 0;
+	for(iCont = 0; iCont < TAM; iCont++){
+		for(jCont = 0; jCont < TAM; jCont++)
+			frequencia = idadeCasais[jCont][iCont];		
+			if(frequencia > maiorFrequencia){
+				maiorFrequencia = frequencia;
+				idadeMaisFrequenteCasais[0] = iCont + 18;
+				idadeMaisFrequenteCasais[1] =  jCont + 18;
+			}
+	}
+	
+	printf("%d %d \n",idadeMaisFrequenteHomens,  idadeMaisFrequenteMulheres);
+	printf("%d %d",idadeMaisFrequenteCasais[0],  idadeMaisFrequenteCasais[1]);
 }
+		
